@@ -1,0 +1,14 @@
+test:
+	nasm ../boot/boot.asm -o boot.bin
+	dd if=boot.bin of=boot.img bs=512 count=1 conv=notrunc
+	bochs -f ./bochsrc
+
+boot:
+	nasm ../boot/boot.asm -o boot.bin
+	dd if=boot.bin of=boot.img bs=512 count=1 conv=notrunc
+	nasm ../boot/loader.asm -o loader.bin
+	mount ./boot.img /run/media/eos/ -t vfat -o loop
+	cp loader.bin /run/media/eos/
+	sync
+	umount /run/media/eos/
+	bochs -f ./bochsrc
