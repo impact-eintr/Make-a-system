@@ -1,3 +1,6 @@
+KERNELDIR = ../kernel
+MAKE = make
+
 test:
 	nasm ../boot/boot.asm -o boot.bin
 	dd if=boot.bin of=boot.img bs=512 count=1 conv=notrunc
@@ -7,6 +10,7 @@ boot:
 	nasm ../boot/boot.asm -o boot.bin
 	dd if=boot.bin of=boot.img bs=512 count=1 conv=notrunc
 	nasm ../boot/loader.asm -o loader.bin
+	cd $(KERNELDIR) && $(MAKE) && cd - && mv $(KERNELDIR)/kernel.bin .
 	mount ./boot.img /run/media/eos/ -t vfat -o loop
 	cp loader.bin /run/media/eos/
 	cp kernel.bin /run/media/eos/
