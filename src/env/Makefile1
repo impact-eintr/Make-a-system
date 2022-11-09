@@ -9,6 +9,7 @@ boot:
 	nasm ../boot/loader.asm -o loader.bin
 	mount ./boot.img /run/media/eos/ -t vfat -o loop
 	cp loader.bin /run/media/eos/
+	cp kernel.bin /run/media/eos/
 	sync
 	umount /run/media/eos/
 	bochs -f ./bochsrc

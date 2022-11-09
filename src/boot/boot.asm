@@ -253,6 +253,7 @@ Label_Go_On_Loading_File:
   mov cl, 1
   call  Func_ReadOneSector
   pop ax
+  ;;
   call  Func_GetFATEntry
   cmp ax, 0fffh
   jz  Label_File_Loaded
