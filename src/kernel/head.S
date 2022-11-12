@@ -14,7 +14,7 @@
 
 .section .text
 
-.global _start
+.global _start // 使得符号对链接器可见，变为对整个工程可用的全局变量
 
 _start:
 
@@ -54,7 +54,7 @@ _start:
 //======= 64-bit mode code
 
 switch_seg:
-  .quad entry64
+  .quad entry64 // .quad 在内存分配8个字节
 
 entry64:
   movq  $0x10,  %rax
