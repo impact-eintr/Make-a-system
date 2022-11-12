@@ -17,3 +17,7 @@ boot:
 	sync
 	umount /run/media/eos/
 	bochs -f ./bochsrc
+
+clean:
+	cd $(KERNELDIR) && $(MAKE) clean && cd -
+

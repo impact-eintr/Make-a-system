@@ -4,14 +4,16 @@
 #include <stdarg.h>
 
 #include "lib.h"
+#include "font.h"
 #include "linkage.h"
 
-#define ZEROPAD 1                              /* pad with zero */
-#define SIGN 2                                 /* unsigned/signed long */
-#define PLUS 4 /* show plus */ #define SPACE 8 /* space if plus */
-#define LEFT 16                                /* left justified */
-#define SPECIAL 32                             /* 0x */
-#define SMALL 64 /* use 'abcdef' instead of 'ABCDEF' */
+#define ZEROPAD 1  /* pad with zero */
+#define SIGN 2     /* unsigned/signed long */
+#define PLUS 4     /* show plus */
+#define SPACE 8    /* space if plus */
+#define LEFT 16    /* left justified */
+#define SPECIAL 32 /* 0x */
+#define SMALL 64   /* use 'abcdef' instead of 'ABCDEF' */
 
 #define is_digit(c) ((c) >= '0' && (c) <= '9')
 
@@ -25,11 +27,9 @@
 #define INDIGO 0x0000ffff //靛
 #define PURPLE 0x008000ff //紫
 
-extern unsigned char font_ascii[256][16];
+extern char buf[4096];
 
-char buf[4096]={0};
-
-struct position {
+typedef struct {
   int XResolution; // 总宽度
   int YResolution; // 总高度
 
@@ -41,7 +41,9 @@ struct position {
 
   unsigned int * FB_addr;
   unsigned long FB_length;
-} Pos;
+} position;
+
+extern position Pos;
 
 void putchar(unsigned int *fb, int Xsize, int x, int y, unsigned int FRcolor,
              unsigned int BKcolor, unsigned char font);
